@@ -1,5 +1,3 @@
-// static/js/main.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('fileInput');
     const uploadBtn = document.getElementById('uploadBtn');
@@ -14,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const memoOverlay = document.getElementById('memoOverlay');
     const memoClose = document.getElementById('memoClose');
 
-    // ===== Логика загрузки/предсказания =====
+    // Логика загрузки/предсказания
 
     // Открываем диалог выбора файла
     uploadBtn.addEventListener('click', () => {
@@ -113,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const edibleText = edible ? 'Съедобный' : 'НЕ съедобный';
         const edibleClass = edible ? 'edible-text' : 'inedible-text';
 
-        // процент уверенности
+        // Процент уверенности
         const confidence = (typeof data.confidence === 'number') ? data.confidence : 0;
         const confidencePercent = Math.round(confidence * 100);
 
@@ -149,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/'/g, '&#039;');
     }
 
-    // ===== Модальное окно "Памятка" =====
+    // Модалка Памятка
 
     memoBtn.addEventListener('click', () => {
         memoOverlay.classList.remove('hidden');

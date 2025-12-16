@@ -1,5 +1,3 @@
-/* ===== Общие стили ===== */
-
 *,
 *::before,
 *::after {
@@ -17,7 +15,7 @@ body {
         #f5eddc;
 }
 
-/* прячем элементы по классу .hidden */
+/* Прячем элементы по классу .hidden */
 .hidden {
     display: none !important;
 }
@@ -30,8 +28,7 @@ body {
     align-items: center;
 }
 
-/* ===== Заголовок ===== */
-
+/* Заголовок */
 .hero {
     text-align: center;
     margin-bottom: 32px;
@@ -59,8 +56,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* ===== Основная карточка ===== */
-
+/* Основная карточка */
 .main-area {
     width: 100%;
     max-width: 960px;
@@ -109,8 +105,7 @@ body {
     text-align: center;
 }
 
-/* ===== Результат ===== */
-
+/* Результат */
 .result-title {
     font-size: 1.5rem;
     font-weight: 600;
@@ -124,11 +119,11 @@ body {
 }
 
 .edible-text {
-    color: #a3b229; /* оливковый */
+    color: #a3b229;
 }
 
 .inedible-text {
-    color: #b35a16; /* рыжий, как на макете */
+    color: #b35a16;
 }
 
 .result-description {
@@ -148,8 +143,7 @@ body {
     color: #555;
 }
 
-/* ===== Загрузка / спиннер ===== */
-
+/* Загрузка/спиннер*/
 .loading {
     text-align: center;
     color: #777;
@@ -170,8 +164,7 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* ===== Кнопки снизу ===== */
-
+/* Кнопки снизу */
 .buttons-row {
     margin-top: 24px;
     display: flex;
@@ -224,8 +217,7 @@ body {
     box-shadow: 0 10px 22px rgba(110, 128, 22, 0.35);
 }
 
-/* ===== Футер ===== */
-
+/* Футер */
 .page-footer {
     margin-top: 32px;
     text-align: center;
@@ -239,8 +231,7 @@ body {
     font-size: 0.85rem;
 }
 
-/* ===== Модальное окно "Памятка" ===== */
-
+/* Модалка Памятка*/
 .memo-overlay {
     position: fixed;
     inset: 0;
@@ -309,8 +300,7 @@ body {
     color: #666;
 }
 
-/* ===== Адаптивность ===== */
-
+/* Адаптивность */
 @media (max-width: 900px) {
     .mushroom-card {
         padding: 22px 20px;

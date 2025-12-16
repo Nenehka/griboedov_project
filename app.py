@@ -4,7 +4,7 @@ import tempfile
 from werkzeug.utils import secure_filename
 from utils import predict_mushroom, load_model_and_indices
 
-# Инициализация Flask приложения
+# Инициализация Flask
 app = Flask(__name__)
 
 # Конфигурация
@@ -16,16 +16,6 @@ def allowed_file(filename):
     """Проверяет, что файл имеет разрешенное расширение"""
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-# @app.before_first_request
-# def initialize():
-#     """Загружает модель при первом запросе"""
-#     try:
-#         load_model_and_indices()
-#         print("Модель и словарь классов успешно загружены")
-#     except Exception as e:
-#         print(f"Ошибка при загрузке модели: {e}")
 
 
 @app.route('/')
@@ -99,11 +89,5 @@ def send_static(path):
 
 
 if __name__ == '__main__':
-    # Создаем необходимые директории, если их нет
-    # os.makedirs('models', exist_ok=True)
-    # os.makedirs('static/css', exist_ok=True)
-    # os.makedirs('static/js', exist_ok=True)
-    # os.makedirs('templates', exist_ok=True)
-
     # Запускаем приложение
     app.run(debug=True, host='0.0.0.0', port=5000)

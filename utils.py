@@ -7,10 +7,9 @@ from PIL import Image
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
-# ===== Словарь съедобности =====
-# ⚠️ Сюда нужно ВСТАВИТЬ ПОЛНЫЙ EDIBILITY_INFO из промта
+# Словарь съедобности
 EDIBILITY_INFO = {
-    # ===== СЪЕДОБНЫЕ =====
+    # СЪЕДОБНЫЕ
     "Amanita rubescens": {
         "name_ru": "Мухомор краснеющий",
         "edible": True,
@@ -138,8 +137,7 @@ EDIBILITY_INFO = {
         "description": "Условно-съедобный весенний гриб. Обязательна предварительная длительная тепловая обработка, сырым ядовит.",
     },
 
-
-    # ===== НЕСЪЕДОБНЫЕ / ЯДОВИТЫЕ =====
+    # НЕСЪЕДОБНЫЕ / ЯДОВИТЫЕ
     "Amanita citrina": {
         "name_ru": "Мухомор поганковидный (цитриновый)",
         "edible": False,
@@ -258,12 +256,12 @@ EDIBILITY_INFO = {
     },
 }
 
-# Базовая директория проекта (где лежит этот файл)
+# Базовая директория проекта
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Глобальные переменные для загруженных модели и словаря классов
-model = None          # сюда загрузим Keras-модель
-class_indices = None  # сюда загрузим словарь {индекс_класса: "Латинское имя"}
+model = None
+class_indices = None # словарь {индекс_класса: "Латинское имя"}
 
 
 def load_model_and_indices():
@@ -287,7 +285,6 @@ def load_model_and_indices():
         print(f"Словарь классов загружен из {indices_path}")
 
         # Инвертируем словарь в {index: class_name}
-        # Пример: {"Amanita rubescens": 0} -> {0: "Amanita rubescens"}
         class_indices = {int(v): k for k, v in raw_indices.items()}
 
     except Exception as e:
@@ -317,8 +314,8 @@ def preprocess_image(img_path, target_size=(224, 224)):
 
         # Конвертируем в numpy-массив и нормализуем
         img_array = image.img_to_array(img)
-        img_array = np.expand_dims(img_array, axis=0)  # добавляем измерение batch
-        img_array = img_array / 255.0                  # нормализация в [0, 1]
+        img_array = np.expand_dims(img_array, axis=0) # добавляем измерение batch
+        img_array = img_array / 255.0 # нормализация в [0, 1]
 
         return img_array
 
@@ -351,8 +348,7 @@ def predict_mushroom(image_path):
         predicted_class_idx = int(np.argmax(predictions[0]))
         confidence = float(predictions[0][predicted_class_idx])
 
-        # Получаем латинское название из словаря классов
-        # ВАЖНО: ключ — целое число, не строка
+        # Получаем латинское название из словаря классов (ключ — целое число, не строка)
         latin_name = class_indices.get(predicted_class_idx, "Unknown")
 
         # Получаем информацию о съедобности из словаря
@@ -386,9 +382,5 @@ def predict_mushroom(image_path):
         raise
 
 
-# Локальное тестирование (опционально)
 if __name__ == "__main__":
     load_model_and_indices()
-    # Пример:
-    # result = predict_mushroom("test_image.jpg")
-    # print(result)
