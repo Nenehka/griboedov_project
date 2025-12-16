@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Грибоедов — распознавание грибов</title>
+
+        <!-- Красивые шрифты -->
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+        <!-- (Bootstrap можно оставить, но он почти не используется) -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Иконки -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        <!-- Наши стили -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <!-- Заголовок -->
+            <header class="hero">
+                <h1 class="hero-title">«Грибоедов»</h1>
+                <p class="hero-subtitle">
+                    — веб‑приложение для автоматического распознавания<br>
+                    видов грибов и оценки их безопасности по фотографии.
+                </p>
+            </header>
+
+            <main class="main-area">
+                <!-- Основная карточка -->
+                <section class="mushroom-card">
+                    <div class="card-inner">
+                        <!-- Левая часть: изображение -->
+                        <div id="imagePreview" class="card-image">
+                            <p class="placeholder-text">
+                                Здесь появится фотография гриба
+                            </p>
+                        </div>
+
+                        <!-- Правая часть: текст / результат -->
+                        <div class="card-info">
+                            <div id="resultContainer">
+                                <p class="placeholder-text">
+                                    Загрузите фото гриба, чтобы узнать,<br>
+                                    что это за гриб и можно ли его есть.
+                                </p>
+                            </div>
+
+                            <div id="loadingSpinner" class="loading hidden">
+                                <div class="loader-circle"></div>
+                                <p>Анализируем изображение...</p>
+                            </div>
+
+                            <div id="predictionResult" class="hidden">
+                                <!-- Сюда JS вставит результат -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Форма с невидимым input для файла -->
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file"
+                        id="fileInput"
+                        name="file"
+                        accept=".png,.jpg,.jpeg,.gif,.bmp"
+                        class="hidden">
+                </form>
+
+                <!-- Кнопки снизу -->
+                <div class="buttons-row">
+                    <button type="button" id="uploadBtn" class="btn-main">
+                        <i class="fas fa-upload"></i>
+                        <span id="uploadBtnText">Загрузить фото</span>
+                    </button>
+
+                    <button type="button" id="memoBtn" class="btn-secondary">
+                        Памятка
+                    </button>
+                </div>
+            </main>
+
+            <footer class="page-footer">
+                <p class="footer-text">
+                    Учебный проект «Грибоедов» © 2025.
+                    Модель MobileNetV2 с Transfer Learning.
+                </p>
+                <p class="footer-warning">
+                    Внимание: сервис носит учебный характер и не гарантирует 100% точность.
+                    Всегда консультируйтесь с опытными грибниками.
+                </p>
+            </footer>
+        </div>
+
+        <!-- Модальное окно "Памятка" -->
+        <div id="memoOverlay" class="memo-overlay hidden">
+            <div class="memo-modal">
+                <button type="button" id="memoClose" class="memo-close" aria-label="Закрыть">
+                    &times;
+                </button>
+
+                <header class="memo-header">
+                    <h2 class="hero-title small">«Грибоедов»</h2>
+                    <p class="hero-subtitle small">
+                        — веб‑приложение для автоматического распознавания<br>
+                        видов грибов и оценки их безопасности по фотографии.
+                    </p>
+                    <h3 class="memo-title">Памятка</h3>
+                </header>
+
+                <div class="memo-content">
+                    <!-- Здесь можешь вставить свой полный текст памятки.
+                        Ниже — краткий пример. -->
+                    <p><strong>Важно:</strong> даже съедобные грибы могут вызвать отравление
+                        при неправильном приготовлении или индивидуальной непереносимости.</p>
+
+                    <p><strong>Точность идентификации.</strong><br>
+                        Если вы не уверены в виде гриба на 100% — не берите его.
+                        Используйте несколько проверенных источников и советы опытных грибников.</p>
+
+                    <p><strong>Экологическая чистота.</strong><br>
+                        Не собирайте грибы вдоль дорог, в промзонах и рядом с загрязнёнными
+                        водоёмами: они накапливают токсины и тяжёлые металлы.</p>
+
+                    <p><strong>Правильная обработка.</strong><br>
+                        Большинство съедобных видов требует отваривания перед жаркой или
+                        маринованием. Всегда сливайте первый отвар.</p>
+
+                    <p><strong>Осторожность при употреблении.</strong><br>
+                        При малейших сомнениях в самочувствии после грибов — немедленно
+                        обратитесь к врачу.</p>
+
+                    <p class="memo-footnote">
+                        Помните: лучше оставить сомнительный гриб в лесу, чем рисковать здоровьем.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Скрипты -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    </body>
+</html>
